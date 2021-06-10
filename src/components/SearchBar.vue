@@ -1,10 +1,14 @@
 <template>
-  <input type="text" @keyup="onChange"/>
+  <input type="text" @keyup="onInputKeyUp"/>
 </template>
 
 <script>
 export default {
   name: "SearchBar",
-  props: ["onChange"],
+  methods: {
+    onInputKeyUp (event) {
+      this.$emit('onInput', event.target.value)
+    }
+  }
 }
 </script>
