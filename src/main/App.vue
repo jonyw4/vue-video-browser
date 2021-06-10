@@ -1,12 +1,20 @@
 <template>
-  <div>
-    <VideoSearchBar @onSearchInput="onSearchInput" @onServiceChange="onSelectChange"/>
-    <VideoList :list="videoList"/>
-  </div>
+  <main class="container">
+    <VideoSearchBar 
+      @onInputSearch="onInputVideoSearch" 
+      @onChangeService="onChangeVideoService"
+    />
+    <VideoList 
+      :list="videoList" 
+      @onClickVideo="onClickVideoListItem" 
+    />
+    {{ videoId }}
+  </main>
 </template>
 
 <script>
-import { VideoSearchBar, VideoList } from '../components'
+import VideoList from '../components/VideoList.vue'
+import VideoSearchBar from '../components/VideoSearchBar.vue'
 
 export default {
   components: { VideoSearchBar, VideoList },
@@ -14,6 +22,7 @@ export default {
   props: ['videoBrowserServiceByVideoServiceId'],
   data: function() {
     return {
+      videoId: '',
       videoServiceId: 'YOUTUBE',
       videoList: [],
     };
@@ -24,12 +33,20 @@ export default {
     }
   },
   methods: {
-    onSelectChange(service){
+    onClickVideoListItem(id){
+      this.videoId = id;
+    },
+    onChangeVideoService(service){
       this.videoServiceId = service
     },
-    async onSearchInput(query) {
+    async onInputVideoSearch(query) {
       this.videoList = await this.videoBrowserService.search(query)
     }
   }
 }
 </script>
+<style scoped>
+  main {
+    padding-top: 30px;
+  }
+</style>

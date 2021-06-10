@@ -1,9 +1,12 @@
 <template>
   <section>
-    <h2>Video List ({{ list.length }})</h2>
+    <h4>Video List ({{ list.length }})</h4>
     <ul>
-      <li v-for="video in list" :key="video.id">
-        {{video.title}}
+      <li class="list-group-item media" v-for="video in list" :key="video.id" @click="onClickVideo(video.id)">
+        <img :src="video.thumbnailUrl" :alt="video.title" />
+        <div class="media-body">
+          {{ video.title }}
+        </div>
       </li>
     </ul>
   </section>
@@ -12,6 +15,26 @@
 <script>
 export default {
   name: 'VideoList',
-  props: ['list']
+  props: {
+    list: Array
+  },
+  methods: {
+    onClickVideo(id){
+      this.$emit('onClickVideo', id)
+    }
+  }
 }
 </script>
+
+<style scoped>
+  li {
+    display: flex;
+    cursor: pointer;
+  }
+  li:hover{
+    background-color: #eee;
+  }
+  li img {
+    margin-right: 8px;
+  }
+</style>

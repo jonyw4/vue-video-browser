@@ -1,10 +1,12 @@
 <template>
-  <div>
-    <input type="text" @keyup="onInputKeyUp"/>
-    <select @change="onSelectChange" v-bind:value="service">
-      <option value="YOUTUBE">Youtube</option>
-      <option value="VIMEO">Vimeo</option>
-    </select>
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" aria-label="Video Searchbar"  @keyup="onInputKeyUp">
+    <div class="input-group-text">
+      <select class="form-select" @change="onSelectChange" v-bind:value="service">
+        <option value="YOUTUBE">Youtube</option>
+        <option value="VIMEO">Vimeo</option>
+      </select>
+    </div>
   </div>
 </template>
 
@@ -18,10 +20,10 @@ export default {
   },
   methods: {
     onInputKeyUp (event) {
-      this.$emit('onSearchInput', event.target.value)
+      this.$emit('onInputSearch', event.target.value)
     },
     onSelectChange(event){
-      this.$emit('onServiceChange', event.target.value)
+      this.$emit('onChangeService', event.target.value)
     }
   }
 }
