@@ -1,7 +1,7 @@
 <template>
   <div>
     <SearchBar @onInput="onInputSearchBar"/>
-    <VideoList>
+    <VideoList :size="videoList.length">
       <VideoListItem v-for="video in videoList" :key="video.id" :video="video" />
     </VideoList>
   </div>
