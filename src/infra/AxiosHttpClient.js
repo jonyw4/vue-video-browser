@@ -1,9 +1,10 @@
 import axios from "axios";
 
 export class AxiosHttpClient {
-  constructor(baseURL) {
+  constructor(baseURL, headers) {
     this.axios = axios.create({
       baseURL,
+      headers
     });
   }
   get(url, params = {}) {
