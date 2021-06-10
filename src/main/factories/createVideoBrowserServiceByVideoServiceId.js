@@ -5,8 +5,14 @@ export function createVideoBrowserServiceByVideoServiceId(
   vimeoHttpClient
 ){
   return {
-    YOUTUBE: new YoutubeVideoBrowserService(youtubeHttpClient),
-    VIMEO: new VimeoVideoBrowserService(vimeoHttpClient),
+    YOUTUBE: {
+      name: 'Youtube',
+      service: new YoutubeVideoBrowserService(youtubeHttpClient),
+    },
+    VIMEO:{ 
+      name: 'Vimeo',
+      service: new VimeoVideoBrowserService(vimeoHttpClient)
+    },
   };
 }
 

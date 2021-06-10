@@ -2,9 +2,10 @@
   <div class="input-group mb-3">
     <input type="text" class="form-control" aria-label="Video Searchbar"  @keyup="onInputKeyUp">
     <div class="input-group-text">
-      <select class="form-select" @change="onSelectChange" v-bind:value="service">
-        <option value="YOUTUBE">Youtube</option>
-        <option value="VIMEO">Vimeo</option>
+      <select class="form-select" @change="onSelectChange" v-bind:value="serviceId">
+        <option v-for="service in serviceList" :value="service.id" :key="service.id">
+          {{service.name}}
+        </option>
       </select>
     </div>
   </div>
@@ -13,11 +14,7 @@
 <script>
 export default {
   name: "VideoSearchBar",
-  props: {
-    service: {
-      default: 'YOUTUBE'
-    }
-  },
+  props: ['serviceId', 'serviceList'],
   methods: {
     onInputKeyUp (event) {
       this.$emit('onInputSearch', event.target.value)

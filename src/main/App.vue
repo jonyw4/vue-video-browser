@@ -3,6 +3,8 @@
     <VideoSearchBar 
       @onInputSearch="onInputVideoSearch" 
       @onChangeService="onChangeVideoService"
+      :serviceId="videoServiceId"
+      :serviceList="videoBrowserServiceList"
     />
     <VideoList 
       :list="videoList" 
@@ -28,8 +30,20 @@ export default {
     };
   },
   computed: {
-    videoBrowserService() {
-      return this.videoBrowserServiceByVideoServiceId[this.videoServiceId]
+    activeVideoBrowserService() {
+      return this.videoBrowserServiceByVideoServiceId[this.videoServiceId].service
+    },
+    videoBrowserServiceList() {
+      const videoBrowserServicesIds = Object.keys(this.videoBrowserServiceByVideoServiceId)
+
+      return videoBrowserServicesIds.map((id) => {
+        const service = this.videoBrowserServiceByVideoServiceId[id];
+
+        return {
+          id,
+          name: service.name
+        }
+      })
     }
   },
   methods: {
@@ -40,7 +54,7 @@ export default {
       this.videoServiceId = service
     },
     async onInputVideoSearch(query) {
-      this.videoList = await this.videoBrowserService.search(query)
+      this.videoList = await this.activeVideoBrowserService.search(query)
     }
   }
 }
