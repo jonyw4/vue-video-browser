@@ -6,9 +6,9 @@ export class AxiosHttpClient {
       baseURL,
     });
   }
-  get(url, params) {
+  get(url, params = {}) {
     return this.axios.get(url, {
-      params: params,
+      params
     });
   }
 }
