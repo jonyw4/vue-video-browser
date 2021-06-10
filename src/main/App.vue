@@ -1,29 +1,34 @@
 <template>
   <div>
-    <SearchBar @onInput="onInputSearchBar"/>
-    <VideoList :size="videoList.length">
-      <VideoListItem v-for="video in videoList" :key="video.id" :video="video" />
-    </VideoList>
+    <VideoSearchBar @onSearchInput="onSearchInput" @onServiceChange="onSelectChange"/>
+    <VideoList :list="videoList"/>
   </div>
 </template>
 
 <script>
-import { SearchBar, VideoList, VideoListItem } from '../components'
-import { createVideoBrowserService } from './factories'
-
-const videoBrowserService = createVideoBrowserService()
+import { VideoSearchBar, VideoList } from '../components'
 
 export default {
-  components: { SearchBar, VideoList, VideoListItem },
+  components: { VideoSearchBar, VideoList },
   name: 'App',
+  props: ['videoBrowserServiceByVideoServiceId'],
   data: function() {
     return {
+      videoServiceId: 'YOUTUBE',
       videoList: [],
     };
   },
+  computed: {
+    videoBrowserService() {
+      return this.videoBrowserServiceByVideoServiceId[this.videoServiceId]
+    }
+  },
   methods: {
-    async onInputSearchBar(query) {
-      this.videoList = await videoBrowserService.search(query)
+    onSelectChange(service){
+      this.videoServiceId = service
+    },
+    async onSearchInput(query) {
+      this.videoList = await this.videoBrowserService.search(query)
     }
   }
 }
