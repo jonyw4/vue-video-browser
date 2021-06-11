@@ -2,7 +2,7 @@
   <div class="input-group mb-3">
     <input type="text" class="form-control" aria-label="Video Searchbar"  @keyup="onInputKeyUp">
     <div class="input-group-text">
-      <select class="form-select" @change="onSelectChange" v-bind:value="serviceId">
+      <select class="form-select" @change="onSelectChange" :value="serviceId">
         <option v-for="service in serviceList" :value="service.id" :key="service.id">
           {{service.name}}
         </option>
