@@ -1,37 +1,43 @@
 <template>
   <main class="container">
+    <VideoPlayer 
+      :title="selectedVideo.title" 
+      :description="selectedVideo.description"
+      :embedUrl="selectedVideo.embedUrl"
+      v-if="selectedVideo" 
+    />
     <VideoSearchBar 
       @onInputSearch="onInputVideoSearch" 
       @onChangeService="onChangeVideoService"
-      :serviceId="videoServiceId"
+      :serviceId="selectedVideoServiceId"
       :serviceList="videoBrowserServiceList"
     />
     <VideoList 
       :list="videoList" 
       @onClickVideo="onClickVideoListItem" 
     />
-    {{ videoId }}
   </main>
 </template>
 
 <script>
 import VideoList from '../components/VideoList.vue'
 import VideoSearchBar from '../components/VideoSearchBar.vue'
+import VideoPlayer from '../components/VideoPlayer.vue'
 
 export default {
-  components: { VideoSearchBar, VideoList },
+  components: { VideoSearchBar, VideoList, VideoPlayer },
   name: 'App',
   props: ['videoBrowserServiceByVideoServiceId'],
   data: function() {
     return {
-      videoId: '',
-      videoServiceId: 'YOUTUBE',
+      selectedVideo: undefined,
+      selectedVideoServiceId: 'YOUTUBE',
       videoList: [],
     };
   },
   computed: {
     activeVideoBrowserService() {
-      return this.videoBrowserServiceByVideoServiceId[this.videoServiceId].service
+      return this.videoBrowserServiceByVideoServiceId[this.selectedVideoServiceId].service
     },
     videoBrowserServiceList() {
       const videoBrowserServicesIds = Object.keys(this.videoBrowserServiceByVideoServiceId)
@@ -47,11 +53,11 @@ export default {
     }
   },
   methods: {
-    onClickVideoListItem(id){
-      this.videoId = id;
+    onClickVideoListItem(video){
+      this.selectedVideo = video;
     },
     onChangeVideoService(service){
-      this.videoServiceId = service
+      this.selectedVideoServiceId = service
     },
     async onInputVideoSearch(query) {
       this.videoList = await this.activeVideoBrowserService.search(query)

@@ -5,7 +5,7 @@
     <div class="ratio ratio-16x9">
       <iframe  
         type="text/html"
-        :src="url"
+        :src="embedUrl"
         frameborder="0"
       />
     </div>
@@ -15,6 +15,6 @@
 <script>
 export default {
   name: 'VideoPlayer',
-  props: ['title', 'description', 'url']
+  props: ['title', 'description', 'embedUrl']
 }
 </script>
