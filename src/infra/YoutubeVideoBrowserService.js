@@ -1,5 +1,7 @@
 import { YOUTUBE_DATA_API_KEY } from "../consts";
 
+const YOUTUBE_EMBED_BASE_URL = "http://www.youtube.com/embed/"
+
 export class YoutubeVideoBrowserService {
   constructor(httpClient){
     this.httpClient = httpClient;
@@ -15,7 +17,9 @@ export class YoutubeVideoBrowserService {
     return response.data.items.map((item) => ({
       id: item.etag,
       title: item.snippet.title,
+      description: item.snippet.description,
       thumbnailUrl: item.snippet.thumbnails.default.url,
+      embedUrl: `${YOUTUBE_EMBED_BASE_URL}${item.id.videoId}&autoplay=1`,
     }));
   }
 }

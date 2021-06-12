@@ -1,3 +1,5 @@
+const VIMEO_PLAYER_BASE_URL = `https://player.vimeo.com/video/`;
+
 export class VimeoVideoBrowserService {
   constructor(httpClient) {
     this.httpClient = httpClient;
@@ -7,10 +9,17 @@ export class VimeoVideoBrowserService {
       query,
       per_page: 5,
     });
-    return response.data.data.map((video) => ({
-      id: video.resource_key,
-      title: video.name,
-      thumbnailUrl: video.pictures.sizes[0].link,
-    }));
+    
+    return response.data.data.map((video) => {
+      const videoUrl = video.uri
+      const videoId = videoUrl.substring(8, videoUrl.length)
+      return ({
+        id: video.resource_key,
+        title: video.name,
+        description: video.description,
+        thumbnailUrl: video.pictures.sizes[0].link,
+        embedUrl: `${VIMEO_PLAYER_BASE_URL}${videoId}`,
+      })
+    });
   }
 }
