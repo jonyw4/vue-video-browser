@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <nav class="col-md-4">
     <h4>Video List ({{ list.length }})</h4>
     <ul>
       <li class="list-group-item media" v-for="video in list" :key="video.id" @click="onClickVideo(video)">
@@ -9,7 +9,7 @@
         </div>
       </li>
     </ul>
-  </section>
+  </nav>
 </template>
 
 <script>
@@ -27,6 +27,9 @@ export default {
 </script>
 
 <style scoped>
+  ul {
+    padding: 0;
+  }
   li {
     display: flex;
     cursor: pointer;

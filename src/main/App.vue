@@ -1,21 +1,25 @@
 <template>
   <main class="container">
-    <VideoPlayer 
-      :title="selectedVideo.title" 
-      :description="selectedVideo.description"
-      :embedUrl="selectedVideo.embedUrl"
-      v-if="selectedVideo" 
-    />
+    
     <VideoSearchBar 
       @onInputSearch="onInputVideoSearch" 
       @onChangeService="onChangeVideoService"
       :serviceId="selectedVideoServiceId"
       :serviceList="videoBrowserServiceList"
     />
-    <VideoList 
-      :list="videoList" 
-      @onClickVideo="onClickVideoListItem" 
-    />
+    <div class="row">
+      <VideoPlayer 
+        :title="selectedVideo.title" 
+        :description="selectedVideo.description"
+        :embedUrl="selectedVideo.embedUrl"
+        v-if="selectedVideo" 
+      />
+      <VideoList 
+        :list="videoList" 
+        @onClickVideo="onClickVideoListItem" 
+      />
+    </div>
+    
   </main>
 </template>
 

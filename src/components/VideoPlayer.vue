@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="col-md-8">
     <h1>{{ title }}</h1>
     <p>{{ description }}</p>
     <div class="ratio ratio-16x9">
