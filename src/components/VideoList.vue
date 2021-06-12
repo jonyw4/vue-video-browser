@@ -2,7 +2,7 @@
   <section>
     <h4>Video List ({{ list.length }})</h4>
     <ul>
-      <li class="list-group-item media" v-for="video in list" :key="video.id" @click="onClickVideo(video.id)">
+      <li class="list-group-item media" v-for="video in list" :key="video.id" @click="onClickVideo(video)">
         <img :src="video.thumbnailUrl" :alt="video.title" />
         <div class="media-body">
           {{ video.title }}
