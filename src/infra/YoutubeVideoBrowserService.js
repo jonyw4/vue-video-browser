@@ -19,7 +19,7 @@ export class YoutubeVideoBrowserService {
       title: item.snippet.title,
       description: item.snippet.description,
       thumbnailUrl: item.snippet.thumbnails.default.url,
-      embedUrl: `${YOUTUBE_EMBED_BASE_URL}${item.id.videoId}&autoplay=1`,
+      embedUrl: `${YOUTUBE_EMBED_BASE_URL}${item.id.videoId}`,
     }));
   }
 }
