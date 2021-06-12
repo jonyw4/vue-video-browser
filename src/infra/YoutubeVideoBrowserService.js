@@ -1,6 +1,6 @@
 import { YOUTUBE_DATA_API_KEY } from "../consts";
 
-const YOUTUBE_EMBED_BASE_URL = "http://www.youtube.com/embed/"
+const YOUTUBE_EMBED_BASE_URL = "https://www.youtube.com/embed/"
 
 export class YoutubeVideoBrowserService {
   constructor(httpClient){
