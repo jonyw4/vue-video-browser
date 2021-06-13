@@ -19,8 +19,8 @@ export default {
     list: Array
   },
   methods: {
-    onClickVideo(id){
-      this.$emit('onClickVideo', id)
+    onClickVideo(video){
+      this.$emit('onClickVideo', video)
     }
   }
 }
