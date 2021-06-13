@@ -34,14 +34,18 @@ describe("components :: VideoSearchBar", () => {
     expect(wrapper.emitted().onChangeService).toBeTruthy();
     expect(wrapper.emitted().onChangeService[0][0]).toBe("VIMEO");
   });
-  it("should emit a onInputSearch when change service", async () => {
+  it("should emit a onInputSearch when change input", async () => {
     const searchTerm = "How to create an Vue Application";
     const wrapper = mount(VideoSearchBar, {
       propsData: defaultProps,
     });
     const input = wrapper.find("input");
     await input.setValue(searchTerm);
+
+    expect(wrapper.emitted().onInputSearch).toBeUndefined();
+
     await wait(400);
+
     expect(wrapper.emitted().onInputSearch).toBeTruthy();
     expect(wrapper.emitted().onInputSearch[0][0]).toBe(searchTerm);
   });
