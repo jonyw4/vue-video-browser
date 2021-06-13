@@ -1,6 +1,6 @@
 <template>
   <div class="input-group mb-3">
-    <input type="text" class="form-control" aria-label="Video Searchbar"  @keyup="debouncedOnInputKeyUp">
+    <input type="text" class="form-control" aria-label="Video Searchbar"  @input="debouncedOnInputKeyUp">
     <div class="input-group-text">
       <select class="form-select" @change="onSelectChange" :value="serviceId">
         <option v-for="service in serviceList" :value="service.id" :key="service.id">
